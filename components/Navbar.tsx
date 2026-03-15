@@ -45,7 +45,7 @@ export default function Navbar() {
           {/* Logo */}
           <div className="flex-shrink-0">
             <span className="text-2xl font-bold gradient-text cursor-pointer" onClick={() => scrollToSection('hero')}>
-              AS
+             <a className="text-xl font-bold transition-all"  href="#hero">&lt;Ahmed /&gt;</a>
             </span>
           </div>
 
