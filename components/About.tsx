@@ -1,12 +1,15 @@
 'use client'
 
 import { useEffect, useState, useRef } from 'react'
-import img from '../app/assets/My-Photo.jpg'
 import Image from 'next/image'
+import img from '../app/assets/My-Photo.jpg'
+import ProfileCard from './ProfileCard'
+import { useTheme } from '@/components/ThemeProvider'
 
 export default function About() {
   const [isVisible, setIsVisible] = useState(false)
   const sectionRef = useRef<HTMLDivElement>(null)
+  const { theme } = useTheme()
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -17,23 +20,17 @@ export default function About() {
       },
       { threshold: 0.1 }
     )
-
     if (sectionRef.current) {
       observer.observe(sectionRef.current)
     }
-
     return () => observer.disconnect()
   }, [])
 
   return (
-    <section
-      id="about"
-      ref={sectionRef}
-      className="py-20 bg-white dark:bg-gray-900"
-    >
+    <section id="about" ref={sectionRef} className="py-20 bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          {/* Section Title */}
+
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
               About <span className="gradient-text">Me</span>
@@ -42,42 +39,56 @@ export default function About() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            {/* Image/Visual */}
-            <div className="relative">
-              <div className="relative w-full aspect-square max-w-md mx-auto">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary-400 to-purple-600 rounded-2xl transform rotate-6"></div>
-                <div className="relative bg-gray-200 dark:bg-gray-700 rounded-2xl overflow-hidden h-full flex items-center justify-center">
-                  <div className="text-center p-8">
-                    <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary-400 to-purple-600 flex items-center justify-center text-white text-5xl font-bold">
-                      YN
-                    </div>
-                    <Image src={img} alt="Profile photo" className="w-full h-full object-cover " />
+
+            <div className="flex items-center justify-center">
+              {theme === 'dark' ? (
+                <ProfileCard
+                  name="Ahmed Sabry"
+                  title="Front-End Developer"
+                  handle="ahmedsabry"
+                  status="Online"
+                  contactText="Contact Me"
+                  avatarUrl={img.src}
+                  showUserInfo={true}
+                  enableTilt={true}
+                  enableMobileTilt={false}
+                  onContactClick={() => {
+                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+                  }}
+                  behindGlowColor="rgba(125, 190, 255, 0.67)"
+                  behindGlowEnabled
+                  innerGradient="linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)"
+                />
+              ) : (
+                <div className="relative w-full aspect-square max-w-md mx-auto">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary-400 to-purple-600 rounded-2xl transform rotate-6"></div>
+                  <div className="relative bg-gray-200 rounded-2xl overflow-hidden ">
+                    <Image src={img} alt="Profile photo" className="w-full  object-cover" />
                   </div>
                 </div>
-              </div>
+              )}
             </div>
 
-            {/* Content */}
             <div className="space-y-6">
               <h3 className="text-3xl font-bold text-gray-900 dark:text-white">
                 Front-End Developer with a passion for creating
               </h3>
-              
+
               <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
-                I'm a passionate web developer with expertise in building modern, responsive, 
-                and user-friendly applications. With a strong foundation in both frontend and 
+                I am a passionate web developer with expertise in building modern, responsive,
+                and user-friendly applications. With a strong foundation in both frontend and
                 backend technologies, I bring ideas to life through clean code and intuitive design.
               </p>
 
               <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
-                I graduated with a degree in Management Information Systems and studied Accounting, 
-                which gives me a unique perspective on building business-focused applications. 
-                I'm also passionate about AI technologies and photography.
+                I graduated with a degree in Management Information Systems and studied Accounting,
+                which gives me a unique perspective on building business-focused applications.
+                I am also passionate about AI technologies and photography.
               </p>
 
-              {/* Quick Facts */}
               <div className="grid grid-cols-2 gap-6 pt-6">
                 <div className="space-y-3">
+
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-full bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center">
                       <svg className="w-5 h-5 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -101,9 +112,11 @@ export default function About() {
                       <p className="font-semibold text-gray-900 dark:text-white">12+ Completed</p>
                     </div>
                   </div>
+
                 </div>
 
                 <div className="space-y-3">
+
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-full bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center">
                       <svg className="w-5 h-5 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -124,16 +137,16 @@ export default function About() {
                     </div>
                     <div>
                       <p className="text-sm text-gray-500 dark:text-gray-400">Speciality</p>
-                      <p className="font-semibold text-gray-900 dark:text-white">React & Next.js</p>
+                      <p className="font-semibold text-gray-900 dark:text-white">React and Next.js</p>
                     </div>
                   </div>
+
                 </div>
               </div>
 
-              {/* Download CV Button */}
               <div className="pt-6">
                 <a
-                  href='/Ahmed_Sabry_CV.pdf'
+                  href="/Ahmed_Sabry_CV.pdf"
                   download
                   className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-600 to-purple-600 text-white rounded-lg font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300"
                 >
@@ -143,6 +156,7 @@ export default function About() {
                   Download CV
                 </a>
               </div>
+
             </div>
           </div>
         </div>
