@@ -3,13 +3,10 @@
 import { useEffect, useState, useRef } from 'react'
 import Image from 'next/image'
 import img from '../app/assets/My-Photo.jpg'
-import ProfileCard from './ProfileCard'
-import { useTheme } from '@/components/ThemeProvider'
 
 export default function About() {
   const [isVisible, setIsVisible] = useState(false)
   const sectionRef = useRef<HTMLDivElement>(null)
-  const { theme } = useTheme()
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -41,32 +38,12 @@ export default function About() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
 
             <div className="flex items-center justify-center">
-              {theme === 'dark' ? (
-                <ProfileCard
-                  name="Ahmed Sabry"
-                  title="Front-End Developer"
-                  handle="ahmedsabry"
-                  status="Online"
-                  contactText="Contact Me"
-                  avatarUrl={img.src}
-                  showUserInfo={true}
-                  enableTilt={true}
-                  enableMobileTilt={false}
-                  onContactClick={() => {
-                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
-                  }}
-                  behindGlowColor="rgba(125, 190, 255, 0.67)"
-                  behindGlowEnabled
-                  innerGradient="linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)"
-                />
-              ) : (
-                <div className="relative w-full aspect-square max-w-md mx-auto">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary-400 to-purple-600 rounded-2xl transform rotate-6"></div>
-                  <div className="relative bg-gray-200 rounded-2xl overflow-hidden ">
-                    <Image src={img} alt="Profile photo" className="w-full  object-cover" />
-                  </div>
+              <div className="relative w-full aspect-square max-w-md mx-auto">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary-400 to-purple-600 rounded-2xl transform rotate-6"></div>
+                <div className="relative bg-gray-200 rounded-2xl overflow-hidden">
+                  <Image src={img} alt="Profile photo" className="w-full object-cover" />
                 </div>
-              )}
+              </div>
             </div>
 
             <div className="space-y-6">
