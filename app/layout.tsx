@@ -21,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning className={cn("font-sans", geist.variable)}>
+    <html translate='no' lang="en" suppressHydrationWarning className={cn("font-sans", geist.variable)}>
       <body className={inter.className}>
         <ThemeProvider>
           <Navbar />

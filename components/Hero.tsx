@@ -66,9 +66,9 @@ useEffect(() => {
           </div>
 
           {/* Main Title */}
-        <h1 className="text-5xl md:text-7xl font-bold mb-6">
+        <h1 className="text-5xl md:text-7xl font-bold mb-6" translate='no'>
   <span className="text-gray-900 dark:text-white">Hi, I'm </span>
-  <span className="gradient-text">
+  <span className="gradient-text" translate='no'>
     {displayText}
     <span className="blinking-cursor">|</span>
   </span>
